@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <title>AILP C^2</title>
+    <meta name="generator" content="Google Web Designer 4.2.0.0802">
+    <meta name="viewport" content="initial-scale=1.0">
+    <style type="text/css">
+      html, body 
+      {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+      }
+      
+      #map
+      {
+        position: absolute;
+        width: 100%;
+        height: 600px;
+      }   
+      
+      .button
+      {
+        position: absolute;
+        background-color: hsl(0, 0%, 15%);
+        color: white;
+        padding: 16px 32px;
+        font-size: 16px;
+        font-family: "Arial Black", Gadget, sans-serif;
+        text-align: center;
+        top: 600px;
+        width: 100%;
+        
+      }
+      
+      .button:hover
+      {
+        background-color: #555555;
+        border: 2px solid #008CBA;
+      }
+      
+    </style>
+  </head>
+  
+  <body>
+    <button class = button onclick="buttonClick()">SEND TO CAT</button>
+    <div id="map">
+    <script>
+      //creates map
+      var map;
+      var markers = [];
+      var zones = [];
+      
+      function initMap()
+      {
+        map = new google.maps.Map(document.getElementById('map'),
+        {
+          //map options
+          center: {lat: 21.2832, lng: -157.8269},
+          zoom: 15,
+        });
+        
+        //zone A
+        var aCoords = [
+          {lat: 21.28486, lng: -157.82064},
+          {lat: 21.28413, lng: -157.82135},
+          {lat: 21.28381, lng: -157.82171},
+          {lat: 21.28362, lng: -157.82199},
+          {lat: 21.28347, lng: -157.82225},
+          {lat: 21.28335, lng: -157.82255},
+          {lat: 21.28327, lng: -157.82289},
+          {lat: 21.28304, lng: -157.82287},
+          {lat: 21.28315, lng: -157.82241},
+          {lat: 21.2833, lng: -157.82203},
+          {lat: 21.28365, lng: -157.82152},
+          {lat: 21.28395, lng: -157.82121},
+          {lat: 21.28471, lng: -157.82043},
+          {lat: 21.28486, lng: -157.82064}
+        ];
+        
+        var zoneA = new google.maps.Polygon ({
+          paths: aCoords,
+          strokeColor: '#ffffff',
+          strokeOpacity: 0,
+          strokeWeight: 2,
+          fillColor: '#ffffff',
+          fillOpacity: 0
+        }); 
+        zoneA.setMap(map);
+        
+        // zone B
+        var bCoords = [
+        {lat: 21.28327, lng: -157.82289},
+        {lat: 21.28325, lng: -157.8235},
+        {lat: 21.28324, lng: -157.82531},
+        {lat: 21.28323, lng: -157.8263},
+        {lat: 21.28278, lng: -157.82586},
+        {lat: 21.28287, lng: -157.82569},
+        {lat: 21.28294, lng: -157.82509},
+        {lat: 21.28297, lng: -157.82437},
+        {lat: 21.28304, lng: -157.82287},
+        {lat: 21.28327, lng: -157.82289}
+        ]
+        
+        var zoneB = new google.maps.Polygon ({
+          paths: bCoords,
+          strokeColor: '#ffffff',
+          strokeOpacity: 0,
+          strokeWeight: 2,
+          fillColor: '#ffffff',
+          fillOpacity: 0
+        });
+        zoneB.setMap(map);
+        
+        // zone C
+        var cCoords = [
+        {lat: 21.28278, lng: -157.82586},
+        {lat: 21.28216, lng: -157.82508},
+        {lat: 21.2807, lng: -157.8234},
+        {lat: 21.27844, lng: -157.82079},
+        {lat: 21.2782, lng: -157.82063},
+        {lat: 21.27692, lng: -157.81921},
+        {lat: 21.27667, lng: -157.81905},
+        {lat: 21.27618, lng: -157.81845},
+        {lat: 21.27604, lng: -157.81833},
+        {lat: 21.2752, lng: -157.8175},
+        {lat: 21.27506, lng: -157.81749},
+        {lat: 21.27497, lng: -157.81757},
+        {lat: 21.27493, lng: -157.81774},
+        {lat: 21.28192, lng: -157.82585},
+        {lat: 21.28278, lng: -157.82586}
+        ]
+        
+        var zoneC = new google.maps.Polygon ({
+          paths: cCoords,
+          strokeColor: '#ffffff',
+          strokeOpacity: 0,
+          strokeWeight: 2,
+          fillColor: '#ffffff',
+          fillOpacity: 0
+        });
+        zoneC.setMap(map);
+        
+        // zone D
+        var dCoords = [
+        {lat: 21.28278, lng: -157.82586},
+        {lat: 21.28323, lng: -157.8263},
+        {lat: 21.28806, lng: -157.83191},
+        {lat: 21.28803, lng: -157.83273},
+        {lat: 21.28798, lng: -157.83266},
+        {lat: 21.2879, lng: -157.83258},
+        {lat: 21.2878, lng: -157.83267},
+        {lat: 21.28192, lng: -157.82585},
+        {lat: 21.28278, lng: -157.82586}
+        ]
+        
+        var zoneD = new google.maps.Polygon ({
+          paths: dCoords,
+          strokeColor: '#ffffff',
+          strokeOpacity: 0,
+          strokeWeight: 2,
+          fillColor: '#ffffff',
+          fillOpacity: 0
+        });
+        zoneD.setMap(map);
+        
+        // zone E
+        var eCoords = [
+        {lat: 21.28806, lng: -157.83191},
+        {lat: 21.28838, lng: -157.83226},
+        {lat: 21.28839, lng: -157.83242},
+        {lat: 21.28849, lng: -157.83284},
+        {lat: 21.2889, lng: -157.83338},
+        {lat: 21.28898, lng: -157.83352},
+        {lat: 21.28907, lng: -157.83374},
+        {lat: 21.2891, lng: -157.83388},
+        {lat: 21.28914, lng: -157.83413},
+        {lat: 21.28915, lng: -157.83426},
+        {lat: 21.28913, lng: -157.83445},
+        {lat: 21.2891, lng: -157.83468},
+        {lat: 21.28903, lng: -157.83502},
+        {lat: 21.28865, lng: -157.83482},
+        {lat: 21.28874, lng: -157.83426},
+        {lat: 21.28871, lng: -157.83396},
+        {lat: 21.28862, lng: -157.83365},
+        {lat: 21.28857, lng: -157.83351},
+        {lat: 21.28842, lng: -157.83327},
+        {lat: 21.28803, lng: -157.83273},
+        {lat: 21.28806, lng: -157.83191}
+        ]
+        
+        var zoneE = new google.maps.Polygon ({
+          paths: eCoords,
+          strokeColor: '#ffffff',
+          strokeOpacity: 0,
+          strokeWeight: 2,
+          fillColor: '#ffffff',
+          fillOpacity: 0
+        });
+        zoneE.setMap(map);
+        
+        // zone F
+        var fCoords = [
+        {lat: 21.28903, lng: -157.83502},
+        {lat: 21.28842, lng: -157.83802},
+        {lat: 21.28802, lng: -157.83787},
+        {lat: 21.28865, lng: -157.83482},
+        {lat: 21.28903, lng: -157.83502}
+        ]
+        
+        var zoneF = new google.maps.Polygon ({
+          paths: fCoords,
+          strokeColor: '#ffffff',
+          strokeOpacity: 0,
+          strokeWeight: 2,
+          fillColor: '#ffffff',
+          fillOpacity: 0
+        });
+        zoneF.setMap(map);
+        
+        zones = [zoneA, zoneB, zoneC, zoneD, zoneE, zoneF];
+        
+        
+        var marker0 = new google.maps.Marker
+        ({
+            position: {lat: 21.28463, lng: -157.82072},
+            clickable: true,
+            draggable: true,
+            map: map
+        });
+        //removes marker
+        marker0.addListener('click', function() {
+          marker0.setMap(null);
+        });
+        
+        var marker1 = new google.maps.Marker
+        ({
+            position: {lat: 21.28289, lng: -157.82628},
+            clickable: true,
+            draggable: true,
+            map: map
+        });
+        marker1.addListener('click', function() {
+          marker1.setMap(null);
+        });
+        
+        var marker2 = new google.maps.Marker
+        ({
+            position: {lat: 21.28619, lng: -157.83002},
+            clickable: true,
+            draggable: true,
+            map: map
+        });
+        marker2.addListener('click', function() {
+          marker2.setMap(null);
+        });
+         
+        markers = [marker0, marker1, marker2];
+        
+        // puts markers back on the map
+        map.addListener('click', function() {
+          var i;
+          for (i = 0; i < markers.length; i++)
+          {
+            if (markers[i].getMap() == null)
+            {
+              markers[i].setMap(map);
+              i = markers.length;
+            }
+          }// END FOR LOOP
+        });
+        
+        } //END INIT MAP
+
+     function buttonClick ()
+      {
+       var btn = document.createElement("BUTTON");
+        document.body.appendChild(btn);
+        getCoord(markers, zones, map);
+        document.write("Go to Google Sheets and copy marker locations!");
+      }
+      
+      
+      
+     //gets coordinates of markers and send to google sheet
+     function getCoord(markers, zones, map)
+      {
+        var lat;
+        var lng;
+        
+        var a;
+        for (a = 0; a < markers.length; a++)
+        {
+          if (markers[a].getMap() == map && google.maps.geometry.poly.containsLocation(markers[a].getPosition(), zones[0]))
+          {
+            lat = markers[a].getPosition().lat();
+            lng = markers[a].getPosition().lng();
+            google.script.run.markerLocation(lat,lng,"a"); 
+          }
+        }
+        
+        var b;
+        for (b = 0; b < markers.length; b++)
+        {
+          if (markers[b].getMap() == map && google.maps.geometry.poly.containsLocation(markers[b].getPosition(), zones[1]))
+          {
+            lat = markers[b].getPosition().lat();
+            lng = markers[b].getPosition().lng();
+            google.script.run.markerLocation(lat,lng,"b"); 
+          }
+        }
+        
+        var c;
+        for (c = 0; c < markers.length; c++)
+        {
+          if (markers[c].getMap() == map && google.maps.geometry.poly.containsLocation(markers[c].getPosition(), zones[2]))
+          {
+            lat = markers[c].getPosition().lat();
+            lng = markers[c].getPosition().lng();
+            google.script.run.markerLocation(lat,lng, "c"); 
+          }
+        }
+        
+        var d;
+        for (d = 0; d < markers.length; d++)
+        {
+          if (markers[d].getMap() == map && google.maps.geometry.poly.containsLocation(markers[d].getPosition(), zones[3]))
+          {
+            lat = markers[d].getPosition().lat();
+            lng = markers[d].getPosition().lng();
+            google.script.run.markerLocation(lat,lng, "d");
+          }
+        }
+        
+        var e;
+        for (e = 0; e < markers.length; e++)
+        {
+          if (markers[e].getMap() == map && google.maps.geometry.poly.containsLocation(markers[e].getPosition(), zones[4]))
+          {
+            lat = markers[e].getPosition().lat();
+            lng = markers[e].getPosition().lng();
+            google.script.run.markerLocation(lat,lng, "e"); 
+          }
+        }
+        
+        var f;
+        for (f = 0; f < markers.length; f++)
+        {
+          if (markers[f].getMap() == map && google.maps.geometry.poly.containsLocation(markers[f].getPosition(), zones[5]))
+          {
+            lat = markers[f].getPosition().lat();
+            lng = markers[f].getPosition().lng();
+            google.script.run.markerLocation(lat,lng,"f"); 
+          }
+        }
+       } // end of getCoord function
+    </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEGUGVl55i7u10NoI5Jf8qVftb7STrFu8&callback=initMap&libraries=geometry"> 
+    </script> 
+  
+  </body>
+  
+</html>
+
